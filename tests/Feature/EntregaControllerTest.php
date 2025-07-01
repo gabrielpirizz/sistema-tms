@@ -13,7 +13,7 @@ class EntregaControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function exibe_pagina_inicial()
+    public function test_exibe_pagina_inicial()
     {
         $response = $this->get('/');
 
@@ -21,7 +21,7 @@ class EntregaControllerTest extends TestCase
         $response->assertRedirect(route('entregas.index'));
     }
 
-    public function exibe_formulario_de_busca()
+    public function test_exibe_formulario_de_busca()
     {
         $response = $this->get(route('entregas.index'));
 
@@ -30,7 +30,7 @@ class EntregaControllerTest extends TestCase
         $response->assertSee('Digite o CPF');
     }
 
-    public function busca_entregas_por_cpf_valido()
+    public function test_busca_entregas_por_cpf_valido()
     {
         $transportadora = Transportadora::factory()->create();
         $entrega = Entrega::factory()->create([
@@ -48,7 +48,7 @@ class EntregaControllerTest extends TestCase
         $response->assertSee($transportadora->fantasia);
     }
 
-    public function retorna_erro_para_cpf_invalido()
+    public function test_retorna_erro_para_cpf_invalido()
     {
         $response = $this->post(route('entregas.buscar'), [
             'cpf' => '123'
@@ -58,7 +58,7 @@ class EntregaControllerTest extends TestCase
         $response->assertSessionHasErrors('cpf');
     }
 
-    public function retorna_erro_para_cpf_vazio()
+    public function test_retorna_erro_para_cpf_vazio()
     {
         $response = $this->post(route('entregas.buscar'), [
             'cpf' => ''
@@ -68,7 +68,7 @@ class EntregaControllerTest extends TestCase
         $response->assertSessionHasErrors('cpf');
     }
 
-    public function exibe_detalhes_da_entrega()
+    public function test_exibe_detalhes_da_entrega()
     {
         $transportadora = Transportadora::factory()->create([
             'fantasia' => 'Transportadora Teste',
@@ -96,14 +96,15 @@ class EntregaControllerTest extends TestCase
         $response->assertSee('ENTREGA REALIZADA');
     }
 
-    public function retorna_erro_para_entrega_inexistente()
+    public function test_retorna_erro_para_entrega_inexistente()
     {
         $response = $this->get(route('entregas.detalhar', 'id-inexistente'));
 
         $response->assertStatus(302);
         $response->assertSessionHas('error');
     }
-    public function aceita_cpf_com_formatacao()
+    
+    public function test_aceita_cpf_com_formatacao()
     {
         $transportadora = Transportadora::factory()->create();
         $entrega = Entrega::factory()->create([
