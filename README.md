@@ -55,20 +55,6 @@ O projeto usa SQLite por padrão. O arquivo já está incluído em `database/dat
 # Execute as migrações
 php artisan migrate
 
-# (Opcional) Execute os seeders se houver
-php artisan db:seed
-```
-
-### 6. Compile os Assets
-
-```bash
-# Para desenvolvimento
-npm run dev
-
-# Para produção
-npm run build
-```
-
 ## Executando o Projeto
 
 ### Modo Desenvolvimento
@@ -132,10 +118,4 @@ php artisan migrate:fresh
 npm run build
 php artisan config:clear
 php artisan cache:clear
-```
-
-### Problema: Erro de Chave
-```bash
-# Regenere a chave da aplicação
-php artisan key:generate
 ```
