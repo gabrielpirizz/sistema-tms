@@ -111,11 +111,3 @@ php artisan test tests/Feature/
 touch database/database.sqlite
 php artisan migrate:fresh
 ```
-
-### Problema: Assets Não Carregam 
-```bash
-
-npm run build
-php artisan config:clear
-php artisan cache:clear
-```
