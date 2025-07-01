@@ -14,7 +14,8 @@ use Mockery;
 class EntregaServiceTest extends TestCase
 {
     private EntregaService $service;
-    private EntregaRepositoryInterface $mockRepository;
+    /** @var EntregaRepositoryInterface&\Mockery\MockInterface */
+    private $mockRepository;
 
     protected function setUp(): void
     {

@@ -13,7 +13,6 @@ class EntregaControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    #[Test]
     public function exibe_pagina_inicial()
     {
         $response = $this->get('/');
@@ -22,7 +21,6 @@ class EntregaControllerTest extends TestCase
         $response->assertRedirect(route('entregas.index'));
     }
 
-    #[Test]
     public function exibe_formulario_de_busca()
     {
         $response = $this->get(route('entregas.index'));
@@ -32,7 +30,6 @@ class EntregaControllerTest extends TestCase
         $response->assertSee('Digite o CPF');
     }
 
-    #[Test]
     public function busca_entregas_por_cpf_valido()
     {
         $transportadora = Transportadora::factory()->create();
@@ -51,7 +48,6 @@ class EntregaControllerTest extends TestCase
         $response->assertSee($transportadora->fantasia);
     }
 
-    #[Test]
     public function retorna_erro_para_cpf_invalido()
     {
         $response = $this->post(route('entregas.buscar'), [
@@ -62,7 +58,6 @@ class EntregaControllerTest extends TestCase
         $response->assertSessionHasErrors('cpf');
     }
 
-    #[Test]
     public function retorna_erro_para_cpf_vazio()
     {
         $response = $this->post(route('entregas.buscar'), [
@@ -73,7 +68,6 @@ class EntregaControllerTest extends TestCase
         $response->assertSessionHasErrors('cpf');
     }
 
-    #[Test]
     public function exibe_detalhes_da_entrega()
     {
         $transportadora = Transportadora::factory()->create([
@@ -102,7 +96,6 @@ class EntregaControllerTest extends TestCase
         $response->assertSee('ENTREGA REALIZADA');
     }
 
-    #[Test]
     public function retorna_erro_para_entrega_inexistente()
     {
         $response = $this->get(route('entregas.detalhar', 'id-inexistente'));
@@ -110,8 +103,6 @@ class EntregaControllerTest extends TestCase
         $response->assertStatus(302);
         $response->assertSessionHas('error');
     }
-
-    #[Test]
     public function aceita_cpf_com_formatacao()
     {
         $transportadora = Transportadora::factory()->create();
