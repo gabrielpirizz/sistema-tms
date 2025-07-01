@@ -23,7 +23,6 @@ Antes de iniciar, certifique-se de ter instalado em sua máquina:
 
 ```bash
 git clone [URL_DO_REPOSITORIO]
-cd teste-tecnico
 ```
 
 ### 2. Instale as dependências
